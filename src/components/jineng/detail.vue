@@ -1,6 +1,6 @@
 <template>
     <div>
-        detail页面
+        这是detail页面
     </div>
 </template>
 
