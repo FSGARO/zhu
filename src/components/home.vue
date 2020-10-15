@@ -1,8 +1,5 @@
 <template>
   <div>
-      <div class="header">这是header</div>
-      adasdasdasdas
-      adasdasdasdasasdasdasdas
       <router-view></router-view>
   </div>
 </template>

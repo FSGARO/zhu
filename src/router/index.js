@@ -1,76 +1,84 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import A from '@/components/router-base/a.vue'
-import B from '@/components/router-base/b.vue'
-import NotPage from '@/components/404.vue'
-import Home from '@/components/home.vue'
+import Vue from "vue";
+import Router from "vue-router";
+import HelloWorld from "@/components/HelloWorld";
+import A from "@/components/router-base/a.vue";
+import B from "@/components/router-base/b.vue";
+import NotPage from "@/components/404.vue";
+import Home from "@/components/home.vue";
+import Container from "@/components/jineng/container.vue";
+import ContainerList from "@/components/jineng/container-list.vue";
+import Detail from "@/components/jineng/detail.vue";
+import Login from "@/components/xiaozuo/login.vue";
 
-import Container from '@/components/jineng/container.vue'
-import ContainerList from '@/components/jineng/container-list.vue'
-import Detail from '@/components/jineng/detail.vue'
+Vue.use(Router);
 
-Vue.use(Router)
+const originalPush = Router.prototype.push;
 
-const originalPush = Router.prototype.push
-
-Router.prototype.push = function push (location, onResolve, onReject) {
-  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
-  return originalPush.call(this, location).catch(err => err)
-}
+Router.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject)
+    return originalPush.call(this, location, onResolve, onReject);
+  return originalPush.call(this, location).catch(err => err);
+};
 
 export default new Router({
   routes: [
     {
-      path: '*',
-      name: '*',
+      path: "*",
+      name: "*",
       component: NotPage
     },
     // 重定向
     {
-      path: '/',
-      name: 'HelloWorld',
+      path: "/",
+      name: "HelloWorld",
       component: HelloWorld
     },
     {
-      path: '/404',
-      name: '404',
+      path: "/404",
+      name: "404",
       component: NotPage
     },
+
+    ,
     {
-      path: '/home',
-      name: 'home',
+      path: "/login",
+      name: "login",
+      component: Login
+    },
+    {
+      path: "/home",
+      name: "home",
       component: Home,
       children: [
         // 别名
         {
-          path: '/a',
-          name: 'a',
+          path: "/a",
+          name: "a",
           component: A
         },
         {
-          path: '/b',
-          name: 'b',
+          path: "/b",
+          name: "b",
           component: B
         }
       ]
     },
     {
-      path: '/container',
-      name: 'container',
+      path: "/container",
+      name: "container",
       component: Container,
       children: [
         {
-          path: '/containerList',
-          name: 'containerList',
+          path: "/containerList",
+          name: "containerList",
           component: ContainerList
         },
         {
-          path: '/detail',
-          name: 'detail',
+          path: "/detail",
+          name: "detail",
           component: Detail
-        },
+        }
       ]
     }
   ]
-})
+});
